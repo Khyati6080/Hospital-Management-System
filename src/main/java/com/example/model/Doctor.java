@@ -4,7 +4,7 @@ public class Doctor {
 	 private int doctorId;
 	 private String name;
 	 private String specialization;
-	 private long contactNumber;
+	 private String contactNumber;
 	 private String availabilitySchedule;
 	public int getDoctorId() {
 		return doctorId;
@@ -24,10 +24,10 @@ public class Doctor {
 	public void setSpecialization(String specialization) {
 		this.specialization = specialization;
 	}
-	public long getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
-	public void setContactNumber(long contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 	public String getAvailabilitySchedule() {

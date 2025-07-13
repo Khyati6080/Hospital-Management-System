@@ -5,20 +5,20 @@ public class User {
 	 private int userId;
 	 private String username;
 	 private String password;
-	 
-	 private Role role;
-	 public enum Role{
+	 private ROLE Role;
+	 public enum ROLE{
 		 ADMIN,
 		 PATIENT,
 		 DOCTOR
 	 }
 	 
 	 
-	 public Role getRole() {
-		return role;
+	
+	public ROLE getRole() {
+		return Role;
 	}
-	public void setRole(Role role) {
-		this.role = role;
+	public void setRole(ROLE role) {
+		Role = role;
 	}
 	public int getUserId() {
 		return userId;

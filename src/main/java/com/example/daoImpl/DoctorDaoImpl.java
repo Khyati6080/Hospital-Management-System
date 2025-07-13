@@ -1,4 +1,4 @@
-package com.example.dao.impl;
+package com.example.daoImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,8 +17,9 @@ public class DoctorDaoImpl implements DoctorDao {
 		String query = "select * from Doctor where doctorId=?";
 		Doctor doctor = null;
 		
-		try(Connection con = DatabaseConnection.getConnection();
-				PreparedStatement ps = con.prepareStatement(query)) {
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1,doctorId);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next())
@@ -27,13 +28,14 @@ public class DoctorDaoImpl implements DoctorDao {
 				doctor.setDoctorId(rs.getInt("doctorId"));
 				doctor.setName(rs.getString("name"));
 				doctor.setSpecialization(rs.getString("specialization"));
-				doctor.setContactNumber(rs.getLong("contactNumber"));
+				doctor.setContactNumber(rs.getString("contactNumber"));
 				doctor.setAvailabilitySchedule(rs.getString("availabilitySchedule"));
 			}
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
+		
 		return doctor;
 	}
 	
@@ -43,12 +45,13 @@ public class DoctorDaoImpl implements DoctorDao {
 		
 		String query = "insert into Doctor(`doctorId`,`name`,`specialization`,`contactNumber`,`availabilitySchedule`) values(?,?,?,?,?)";
 		
-		try(Connection con = DatabaseConnection.getConnection();
-				PreparedStatement ps = con.prepareStatement(query)){
+		try{
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1,doctor.getDoctorId());
 			ps.setString(2,doctor.getName());
 			ps.setString(3, doctor.getSpecialization());
-			ps.setLong(4,doctor.getContactNumber());
+			ps.setString(4,doctor.getContactNumber());
 			ps.setString(5, doctor.getAvailabilitySchedule());
 			ps.executeUpdate();
 			
@@ -62,8 +65,16 @@ public class DoctorDaoImpl implements DoctorDao {
 	@Override
 	public void updateDoctor(int doctorId,Doctor doctor) {
 		String query = "update Doctor set name=? where doctorId=?"; 
-		try(Connection con = DatabaseConnection.getConnection();
-				PreparedStatement ps = con.prepareStatement(query)){
+		try{
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			
+			ps.setInt(1, doctor.getDoctorId());
+			ps.setString(2,doctor.getName());
+			ps.setString(3, doctor.getSpecialization());
+			ps.setString(4,doctor.getContactNumber());
+			ps.setString(5, doctor.getAvailabilitySchedule());
+			ps.executeUpdate();
 		
 	    }catch(SQLException e) {
 		    e.printStackTrace();
